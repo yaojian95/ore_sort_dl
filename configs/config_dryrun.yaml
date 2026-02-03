@@ -1,0 +1,22 @@
+
+# Config for Ore Grade Prediction - Dry Run
+
+data:
+  pickle_path: "input_0219_0224_0225_0226_0227_contour_th_128_pixels_grades_images_aligned.pkl"
+  image_size: 128
+  target_columns: ["Fe_grade", "Zn_grade", "Pb_grade", "S_grade"]
+  test_split: 0.2
+  val_split: 0.1
+  batch_size: 4
+  num_workers: 0
+
+training:
+  epochs: 1
+  learning_rate: 0.001
+  device: "cpu" # Force CPU for dry run safety/compatibility
+  save_dir: "output/checkpoints_dryrun"
+  log_dir: "output/logs_dryrun"
+
+model:
+  in_channels: 2
+  base_filters: 32

@@ -1,0 +1,41 @@
+
+# Config for Ore Grade Prediction
+experiment_name: "experiment_decrease_lr"
+
+data:
+  pickle_path: "input_0219_0224_0225_0226_0227_contour_th_128_pixels_grades_images_aligned.pkl"
+  image_size: 128  # Resize images to this dimension
+  target_columns: ["Fe_grade", "Zn_grade", "Pb_grade"]
+  test_split: 0.2
+  val_split: 0.1
+  batch_size: 32
+  num_workers: 0 # Windows sometimes has issues with multiprocessing in dataloaders
+
+training:
+  epochs: 64
+  learning_rate: 0.001
+  device: "cuda"  # 'cuda' or 'cpu'
+  save_dir: "output/checkpoints"
+  log_dir: "output/logs_"
+
+model:
+  in_channels: 2  # Low energy + High energy
+  base_filters: 32
+
+model_selection:
+  available_models:
+    1: "resnet18"
+    2: "mobilenet_v3_small"
+    3: "efficientnet_b0"
+    4: "resnet18_spatial"
+  selected_models: "4"  # Options: "all", 1, [1, 2], "1,3"
+
+
+metrics:
+  thresholds:
+    Fe_grade: 5.0
+    Zn_grade: 0.5
+    Pb_grade: 0.5
+    Pb_Zn_grade: 3.0       # Composite Pb + Zn
+    Pb_Zn_Fe_grade: 10.0   # Composite Pb + Zn + Fe
+
