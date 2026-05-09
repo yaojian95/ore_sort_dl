@@ -18,7 +18,6 @@ class OreDataset(Dataset):
             data = pickle.load(f)
 
         self.grade_df = data[1]
-        self.grade_df = data[1]
         images_raw_sources = data[2]
         
         self.low_energy_imgs = []

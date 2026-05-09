@@ -12,7 +12,7 @@ data:
   num_workers: 0 # Windows sometimes has issues with multiprocessing in dataloaders
 
 training:
-  epochs: 64
+  epochs: 1
   learning_rate: 0.001
   device: "cuda"  # 'cuda' or 'cpu'
   save_dir: "output/checkpoints"
